@@ -3,118 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AegisLLM | Automated Red-Teaming & Security Operations Console</title>
+  <title>AegisLLM | Enterprise Red-Teaming & Security Operations Console</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <div class="logo-badge">AEGIS</div>
+    <div class="brand">
+      <div class="brand-shield">🛡️</div>
       <div>
-        <h1 style="font-size: 1.25rem; font-weight: 700;">AegisLLM Security Center</h1>
-        <p style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="header_subtitle">Büyük Dil Modelleri (LLM) İçin Otomatik Güvenlik & Zafiyet Tarayıcısı</p>
+        <div class="brand-title">AegisLLM Security Operations Center</div>
+        <div class="brand-subtitle" data-i18n="header_subtitle">Büyük Dil Modelleri (LLM) İçin Otomatik Güvenlik & Zafiyet Tarayıcısı</div>
       </div>
     </div>
-    <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.85rem; font-family: var(--font-mono);">
+    
+    <div class="header-status">
       <!-- 5-Language Switcher -->
-      <div class="lang-selector">
-        <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Language Selector">
-          <option value="tr">🇹🇷 Türkçe</option>
-          <option value="en">🇬🇧 English</option>
-          <option value="de">🇩🇪 Deutsch</option>
-          <option value="fr">🇫🇷 Français</option>
-          <option value="es">🇪🇸 Español</option>
-        </select>
+      <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)" aria-label="Language Selector">
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="es">🇪🇸 Español</option>
+      </select>
+
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span data-i18n="engine_status">MOTOR HAZIR</span>
       </div>
-      <span style="color: var(--accent-green);" data-i18n="engine_status">● MOTOR HAZIR</span>
-      <span style="color: var(--text-muted);">v0.1.0</span>
     </div>
   </header>
 
+  <!-- Main Grid -->
   <main>
     <div class="grid-2">
       <!-- LEFT: TARGET & SCAN CONFIG -->
       <div class="card">
-        <h2 class="card-title" data-i18n="card_scan_config">Tarama Yapılandırması</h2>
-        <form id="scan-form" onsubmit="handleStartScan(event)">
+        <div class="card-header">
+          <span class="card-title" data-i18n="card_scan_config">🎯 Tarama Yapılandırması</span>
+        </div>
+
+        <!-- Target Switcher (Segmented Control) -->
+        <label class="form-label" data-i18n="lbl_target_arch">Hedef Model Mimarisi</label>
+        <div class="segmented-control">
+          <button type="button" class="segmented-btn active" id="btn-target-mock" onclick="setTargetType('mock')" data-i18n="opt_target_mock">Simüle Sandbox</button>
+          <button type="button" class="segmented-btn" id="btn-target-http" onclick="setTargetType('http')" data-i18n="opt_target_http">Uzak API (Ollama / OpenAI)</button>
+        </div>
+        <input type="hidden" id="target-type" value="mock">
+
+        <!-- Mock Profile Cards (Visible when target is mock) -->
+        <div id="mock-section">
+          <label class="form-label" data-i18n="lbl_safety_posture">Model Güvenlik Duruşu</label>
+          <div class="profile-cards">
+            <!-- Vulnerable Profile -->
+            <div class="profile-card" id="profile-vulnerable" onclick="selectProfile('vulnerable')">
+              <div class="profile-card-left">
+                <div class="profile-name">
+                  <span data-i18n="profile_vuln_title">Savunmasız Model</span>
+                  <span class="badge-tag vulnerable">F NOTU</span>
+                </div>
+                <div class="profile-desc" data-i18n="profile_vuln_desc">Filtresiz ve naif; saldırganların tuzaklarına anında düşer.</div>
+              </div>
+            </div>
+
+            <!-- Realistic Profile (Default) -->
+            <div class="profile-card active" id="profile-realistic" onclick="selectProfile('realistic')">
+              <div class="profile-card-left">
+                <div class="profile-name">
+                  <span data-i18n="profile_real_title">Gerçekçi Model</span>
+                  <span class="badge-tag realistic">B NOTU</span>
+                </div>
+                <div class="profile-desc" data-i18n="profile_real_desc">Temel saldırıları savuşturur; şifreli ve mutasyonlu tuzaklara açık verir.</div>
+              </div>
+            </div>
+
+            <!-- Hardened Profile -->
+            <div class="profile-card" id="profile-hardened" onclick="selectProfile('hardened')">
+              <div class="profile-card-left">
+                <div class="profile-name">
+                  <span data-i18n="profile_hard_title">Güçlendirilmiş Model</span>
+                  <span class="badge-tag hardened">A+ NOTU</span>
+                </div>
+                <div class="profile-desc" data-i18n="profile_hard_desc">Sıkı kurumsal güvenlik duvarı; hiçbir kötü niyetli prompt'u kabul etmez.</div>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" id="mock-profile" value="realistic">
+        </div>
+
+        <!-- Remote API Section (Hidden by default) -->
+        <div id="http-section" style="display: none;">
           <div class="form-group">
-            <label data-i18n="lbl_target_arch">Hedef Model Mimarisi</label>
-            <select id="target-type" onchange="toggleTargetFields()">
-              <option value="mock" data-i18n="opt_target_mock">Simüle Edilmiş Model (Çevrimdışı Sandbox)</option>
-              <option value="http" data-i18n="opt_target_http">Uzak OpenAI-Uyumlu API (Ollama / vLLM / OpenAI)</option>
-            </select>
+            <label class="form-label" data-i18n="lbl_endpoint_url">Uç Nokta URL (OpenAI-Uyumlu)</label>
+            <input type="text" id="http-url" value="http://localhost:11434/v1" placeholder="Örn: http://localhost:11434/v1">
           </div>
-
-          <div id="mock-fields" class="form-group">
-            <label data-i18n="lbl_safety_posture">Model Güvenlik Duruşu</label>
-            <select id="mock-profile">
-              <option value="vulnerable" data-i18n="opt_mock_vulnerable">Savunmasız (Filtresiz / Korumasız)</option>
-              <option value="realistic" selected data-i18n="opt_mock_realistic">Gerçekçi (Temel saldırılara kapalı, mutasyonlara açık)</option>
-              <option value="hardened" data-i18n="opt_mock_hardened">Güçlendirilmiş (Sıkı güvenlik duvarı ve hizalanma)</option>
-            </select>
-          </div>
-
-          <div id="http-fields" style="display: none;">
-            <div class="form-group">
-              <label data-i18n="lbl_endpoint_url">Uç Nokta URL (Endpoint URL)</label>
-              <input type="text" id="http-url" value="http://localhost:11434/v1" placeholder="Örn: http://localhost:11434/v1">
-            </div>
-            <div class="form-group">
-              <label data-i18n="lbl_model_id">Model Tanımlayıcısı</label>
-              <input type="text" id="model-name" value="llama3.2:latest">
-            </div>
-            <div class="form-group">
-              <label data-i18n="lbl_api_key">API Anahtarı (Opsiyonel)</label>
-              <input type="password" id="api-key" placeholder="Bearer sk-...">
-            </div>
-          </div>
-
           <div class="form-group">
-            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-              <input type="checkbox" id="apply-mutations" style="width: auto;">
-              <span data-i18n="lbl_enable_mutations">Fuzzing Saldırı Mutasyonlarını Aç (Base64, ROT13, Leet, Görünmez Boşluk)</span>
-            </label>
+            <label class="form-label" data-i18n="lbl_model_id">Model Tanımlayıcısı</label>
+            <input type="text" id="model-name" value="llama3.2:latest" placeholder="Örn: llama3.2">
           </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="lbl_api_key">API Anahtarı (Opsiyonel)</label>
+            <input type="password" id="api-key" placeholder="sk-...">
+          </div>
+        </div>
 
-          <button type="submit" id="scan-btn" class="btn">
-            <span data-i18n="btn_launch_scan">Otomatik Güvenlik Taramasını Başlat</span>
-          </button>
-        </form>
+        <!-- Mutation Toggle Switch -->
+        <div class="switch-wrap" onclick="toggleMutationCheckbox()">
+          <div class="switch-label">
+            <div class="switch-title" data-i18n="lbl_mutation_title">Saldırı Mutasyonlarını Aç (Fuzzing)</div>
+            <div class="switch-desc" data-i18n="lbl_mutation_desc">Prompt'ları Base64, ROT13, Leet ve görünmez boşluklarla şifreler.</div>
+          </div>
+          <label class="switch" onclick="event.stopPropagation()">
+            <input type="checkbox" id="apply-mutations">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Action Button -->
+        <button type="button" id="scan-btn" class="btn-launch" onclick="handleStartScan()">
+          <span class="spinner" id="btn-spinner"></span>
+          <span id="btn-text" data-i18n="btn_launch_scan">⚡ Otomatik Güvenlik Taramasını Başlat</span>
+        </button>
       </div>
 
       <!-- RIGHT: LIVE AUDIT DASHBOARD -->
       <div class="card">
-        <div class="card-title">
-          <span data-i18n="card_scorecard">Güvenlik Denetim Karnesi</span>
-          <span id="scan-status" style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-cyan);" data-i18n="status_ready">Hazır</span>
+        <div class="card-header">
+          <span class="card-title" data-i18n="card_scorecard">📊 Güvenlik Denetim Karnesi</span>
+          <span id="scan-status" class="badge-tag realistic" style="font-size: 0.75rem;" data-i18n="status_ready">HAZIR</span>
         </div>
 
-        <div class="stats-row">
-          <div class="stat-box">
-            <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="stat_grade_lbl">GÜVENLİK NOTU</div>
-            <div id="stat-grade" class="stat-value">-</div>
+        <!-- Live Scanning Animation Widget -->
+        <div id="scanning-widget" class="scanning-widget">
+          <div class="progress-bar-wrap">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
           </div>
-          <div class="stat-box">
-            <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="stat_asr_lbl">SALDIRI BAŞARI ORANI</div>
-            <div id="stat-asr" class="stat-value" style="color: var(--accent-yellow);">-</div>
-          </div>
-          <div class="stat-box">
-            <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="stat_total_lbl">TOPLAM SALDIRI</div>
-            <div id="stat-total" class="stat-value">-</div>
-          </div>
-          <div class="stat-box">
-            <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="stat_exploits_lbl">BULUNAN AÇIKLAR</div>
-            <div id="stat-exploits" class="stat-value" style="color: var(--accent-red);">-</div>
+          <div class="scan-feed">
+            <div class="scan-pulse-icon"></div>
+            <span id="scan-feed-text" data-i18n="scan_feed_init">Kırmızı takım saldırı probları modele enjekte ediliyor...</span>
           </div>
         </div>
 
-        <h3 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text-muted);" data-i18n="heading_vulns">Tespit Edilen Güvenlik Açıkları</h3>
-        <div id="vuln-container" style="max-height: 480px; overflow-y: auto;">
-          <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="prompt_launch_scan">Model zafiyetlerini test etmek için sol taraftan taramayı başlatın.</p>
+        <!-- Scorecard Metrics Grid -->
+        <div class="stats-grid">
+          <div class="stat-card grade-box">
+            <div class="stat-label" data-i18n="stat_grade_lbl">Güvenlik Notu</div>
+            <div id="stat-grade" class="stat-val">-</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label" data-i18n="stat_asr_lbl">Saldırı Başarısı (ASR)</div>
+            <div id="stat-asr" class="stat-val" style="color: var(--amber);">-</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label" data-i18n="stat_total_lbl">Toplam Test</div>
+            <div id="stat-total" class="stat-val">-</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label" data-i18n="stat_exploits_lbl">Açık Sayısı</div>
+            <div id="stat-exploits" class="stat-val" style="color: var(--rose);">-</div>
+          </div>
+        </div>
+
+        <!-- Vulnerabilities List -->
+        <div class="card-header" style="margin-bottom: 0.75rem; padding-bottom: 0.5rem;">
+          <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);" data-i18n="heading_vulns">Tespit Edilen Güvenlik Açıkları & Kanıtlar</span>
+        </div>
+        
+        <div id="vuln-container" class="vuln-list">
+          <div style="padding: 2.5rem 1rem; text-align: center; color: var(--text-dim); font-size: 0.85rem;" data-i18n="prompt_launch_scan">
+            Modelin güvenlik açıklarını değerlendirmek için sol taraftaki <strong>"Otomatik Güvenlik Taramasını Başlat"</strong> butonuna basın.
+          </div>
         </div>
       </div>
     </div>
   </main>
+
+  <!-- Clean Toast -->
+  <div id="toast" class="toast">
+    <span id="toast-msg">Panoya kopyalandı</span>
+  </div>
 
   <script src="/static/app.js"></script>
 </body>
