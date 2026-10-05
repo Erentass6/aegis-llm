@@ -299,14 +299,16 @@ const I18N = {
     step2_desc: "Ofusca prompts mediante Base64, ROT13 y espacios invisibles.",
     step3_title: "3. Envío asíncrono",
     step3_desc: "Envía pruebas concurrentes a través del grupo de workers.",
-    step4_title: "4. Inspección de oráculos"
+    step4_title: "4. Inspección de oráculos",
+    step5_title: "5. Ficha y reporte"
   }
 };
 
 let currentLang = localStorage.getItem("aegis_lang") || "tr";
 let isScanning = false;
 let scanInterval = null;
-let telemetryCounter = 0;
+let telemetryTimer = null;
+let radarAngle = 0;
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
@@ -316,6 +318,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   applyTranslations(currentLang);
   initTelemetryLogs();
+  startContinuousTelemetry();
+  startRadarCanvas();
 });
 
 // Change Language
@@ -424,17 +428,113 @@ function appendLog(tag, msg, type = "") {
     <span class="log-msg">${msg}</span>
   `;
   container.appendChild(row);
+
+  // Keep max 40 log lines
+  while (container.children.length > 40) {
+    container.removeChild(container.firstChild);
+  }
   container.scrollTop = container.scrollHeight;
 }
 
 function initTelemetryLogs() {
   appendLog("SYSTEM", "AegisLLM Enterprise SOC autonomous engine armed and listening.", "success");
-  appendLog("OWASP", "Loaded 15 attack suites across LLM01 (Injection), LLM02 (Leaks), LLM04 (DoS), LLM07 (System Prompt).");
-  appendLog("ORACLES", "Refusal heuristic detector, canary token oracle & judge engines synchronized.");
-  appendLog("STANDBY", "Awaiting target scan initiation.");
+  appendLog("OWASP", "Loaded 15 attack suites across LLM01, LLM02, LLM04, LLM07.");
+  appendLog("ORACLES", "Refusal heuristic detector, canary token oracle & judge online.", "info");
 }
 
-// Set Active Step in Bottom Pipeline Visualizer
+// Continuous Background Telemetry Feed
+function startContinuousTelemetry() {
+  const samplePings = [
+    { tag: "HEARTBEAT", msg: "Telemetry node latency: 9ms. Oracles in sync.", type: "info" },
+    { tag: "RADAR", msg: "Autonomous monitoring active: 0 unauthenticated calls.", type: "success" },
+    { tag: "INTEGRITY", msg: "Attack suite checksum verified: CRC32=0x9A4F82B1.", type: "info" },
+    { tag: "MONITOR", msg: "Model target interface ready for concurrent dispatch.", type: "info" }
+  ];
+  let pingIndex = 0;
+
+  telemetryTimer = setInterval(() => {
+    if (!isScanning) {
+      const ping = samplePings[pingIndex % samplePings.length];
+      appendLog(ping.tag, ping.msg, ping.type);
+      pingIndex++;
+    }
+  }, 2800);
+}
+
+// Real-Time Rotating Radar Canvas
+function startRadarCanvas() {
+  const canvas = document.getElementById("radar-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width;
+  const h = canvas.height;
+  const cx = w / 2;
+  const cy = h / 2;
+  const r = cx - 2;
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    // Background circle
+    ctx.fillStyle = "#0c0c0e";
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Concentric grid rings
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.lineWidth = 1;
+    [0.35, 0.7, 1].forEach(scale => {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r * scale, 0, Math.PI * 2);
+      ctx.stroke();
+    });
+
+    // Crosshairs
+    ctx.beginPath();
+    ctx.moveTo(cx, 2);
+    ctx.lineTo(cx, h - 2);
+    ctx.moveTo(2, cy);
+    ctx.lineTo(w - 2, cy);
+    ctx.stroke();
+
+    // Rotating Sweep Beam
+    radarAngle += 0.045;
+    const endX = cx + Math.cos(radarAngle) * r;
+    const endY = cy + Math.sin(radarAngle) * r;
+
+    // Beam line
+    ctx.strokeStyle = "#10b981";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+
+    // Sweep trail
+    const trailGradient = ctx.createConicGradient(radarAngle - Math.PI / 2, cx, cy);
+    trailGradient.addColorStop(0, "rgba(16, 185, 129, 0.25)");
+    trailGradient.addColorStop(0.15, "transparent");
+    ctx.fillStyle = trailGradient;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Simulated blips
+    const blipX = cx + Math.cos(1.2) * (r * 0.55);
+    const blipY = cy + Math.sin(1.2) * (r * 0.55);
+    ctx.fillStyle = "#f59e0b";
+    ctx.beginPath();
+    ctx.arc(blipX, blipY, 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
+// Pipeline Steps
 function setPipelineStep(stepNum, stateText = "ÇALIŞIYOR") {
   for (let i = 1; i <= 5; i++) {
     const node = document.getElementById(`step-node-${i}`);
@@ -458,25 +558,6 @@ function setPipelineStep(stepNum, stateText = "ÇALIŞIYOR") {
       tag.style.color = "var(--text-dim)";
     }
   }
-}
-
-function resetPipeline() {
-  for (let i = 1; i <= 5; i++) {
-    const node = document.getElementById(`step-node-${i}`);
-    const tag = document.getElementById(`step-tag-${i}`);
-    if (node) {
-      node.classList.remove("active-step");
-      node.style.borderColor = "var(--border-default)";
-    }
-    if (tag) {
-      tag.innerText = "HAZIR";
-      tag.style.color = "var(--text-dim)";
-    }
-  }
-  const statusText = document.getElementById("pipeline-status-text");
-  const dot = document.getElementById("pipeline-dot");
-  if (statusText) statusText.innerText = t("pipeline_status_idle");
-  if (dot) dot.style.background = "#a1a1aa";
 }
 
 // Start Scan
@@ -517,9 +598,9 @@ async function handleStartScan() {
   if (pipelineDot) pipelineDot.style.background = "var(--amber)";
 
   // Telemetry: Start
-  appendLog("SCAN_START", `Initiated red-team scan. Target: ${targetType === 'mock' ? mockProfile : modelName}, Mutations: ${applyMutations}`);
+  appendLog("SCAN_START", `Initiated red-team scan. Target: ${targetType === 'mock' ? mockProfile : modelName}, Mutations: ${applyMutations}`, "info");
   
-  // Animate Pipeline Step 1
+  // Pipeline Step 1
   setPipelineStep(1, "SENTEZLENİYOR");
   appendLog("PAYLOAD_GEN", "Compiling 15 base attack vectors from OWASP LLM taxonomy...");
 
@@ -583,7 +664,7 @@ async function handleStartScan() {
     if (pipelineStatusText) pipelineStatusText.innerText = t("pipeline_status_idle");
     if (pipelineDot) pipelineDot.style.background = "var(--emerald)";
 
-    appendLog("SCORECARD", `Audit finalized in ${data.scan_duration_seconds}s. Final Grade: ${data.grade}, ASR: ${data.attack_success_rate_pct}%, Exploits: ${data.successful_exploits}/${data.total_probes}`, data.successful_exploits > 0 ? "crit" : "success");
+    appendLog("SCORECARD", `Audit finalized in ${data.scan_duration_seconds}s. Grade: ${data.grade}, ASR: ${data.attack_success_rate_pct}%, Exploits: ${data.successful_exploits}/${data.total_probes}`, data.successful_exploits > 0 ? "crit" : "success");
 
     statusBadge.innerText = `${t("status_completed")} (${data.scan_duration_seconds}s)`;
     statusBadge.className = "badge-tag hardened";

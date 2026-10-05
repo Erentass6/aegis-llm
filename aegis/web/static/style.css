@@ -1,18 +1,18 @@
 /* ==========================================================
    AegisLLM Enterprise SOC - Matte Titanium & Carbon Theme
-   (No Dark Blue - Pure Industrial Monochrome with Warm Accents)
+   (Pure Industrial Monochrome, No Blue, High-Frame-Rate Animations)
    ========================================================== */
 
 :root {
-  --bg-app: #09090b;             /* Pure deep matte obsidian / carbon */
-  --bg-header: #111114;
-  --bg-surface: #141417;          /* Matte zinc surface */
+  --bg-app: #08080a;             /* Pure deep matte carbon */
+  --bg-header: #0f0f12;
+  --bg-surface: #131316;          /* Matte zinc surface */
   --bg-surface-elevated: #1a1a1f; /* Slightly raised surface */
-  --bg-surface-subtle: #0d0d0f;   /* Recessed surface */
+  --bg-surface-subtle: #0b0b0e;   /* Recessed surface */
   
   --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-default: #232328;
-  --border-hover: #383842;
+  --border-default: #222227;
+  --border-hover: #36363f;
   --border-active: #ffffff;
 
   /* High-Contrast White Primary (Vercel / Linear Style) */
@@ -22,11 +22,11 @@
 
   /* State Accents (No Blue!) */
   --emerald: #10b981;
-  --emerald-subtle: rgba(16, 185, 129, 0.12);
+  --emerald-subtle: rgba(16, 185, 129, 0.14);
   --rose: #f43f5e;
-  --rose-subtle: rgba(244, 63, 94, 0.12);
+  --rose-subtle: rgba(244, 63, 94, 0.14);
   --amber: #f59e0b;
-  --amber-subtle: rgba(245, 158, 11, 0.12);
+  --amber-subtle: rgba(245, 158, 11, 0.14);
 
   --text-main: #f4f4f5;
   --text-muted: #a1a1aa;
@@ -75,7 +75,7 @@ header {
 .brand-shield {
   width: 36px;
   height: 36px;
-  background: #1c1c22;
+  background: #18181c;
   border: 1px solid #2d2d35;
   border-radius: var(--radius-sm);
   display: flex;
@@ -216,10 +216,10 @@ main {
 }
 
 .segmented-btn.active {
-  background: #27272e;
+  background: #25252b;
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Profile Selector Cards */
@@ -249,7 +249,7 @@ main {
 
 .profile-card.active {
   border-color: #71717a;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .profile-card-left {
@@ -499,7 +499,7 @@ input:checked + .slider:before {
   border-color: #3f3f46;
 }
 
-/* Live Scanning Animation Widget */
+/* Live Scanning Progress Widget */
 .scanning-widget {
   background: var(--bg-surface-subtle);
   border: 1px solid var(--border-default);
@@ -520,7 +520,7 @@ input:checked + .slider:before {
 }
 
 .progress-bar-wrap {
-  height: 5px;
+  height: 6px;
   background: #232328;
   border-radius: 9999px;
   overflow: hidden;
@@ -531,10 +531,10 @@ input:checked + .slider:before {
 .progress-bar-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #e4e4e7, #ffffff);
+  background: linear-gradient(90deg, #d4d4d8, #ffffff);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 9999px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
 .scan-feed {
@@ -717,7 +717,7 @@ pre.code-view.leak {
   border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
   padding: 1.75rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 .pipeline-header {
@@ -731,8 +731,17 @@ pre.code-view.leak {
 
 .pipeline-title-wrap {
   display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+#radar-canvas {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #08080a;
+  border: 1px solid #27272a;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);
 }
 
 .pipeline-title {
@@ -758,7 +767,7 @@ pre.code-view.leak {
   margin-bottom: 1.5rem;
 }
 
-/* Connecting Line Behind Track */
+/* Connecting Base Line */
 .pipeline-track::before {
   content: "";
   position: absolute;
@@ -770,24 +779,24 @@ pre.code-view.leak {
   z-index: 1;
 }
 
-/* Animated Data Laser Flow on Connecting Line */
+/* High-Contrast Moving Energy Laser Pulse */
 .pipeline-track::after {
   content: "";
   position: absolute;
-  top: 35px;
-  left: 5%;
-  width: 90%;
-  height: 4px;
-  background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.8) 50%, transparent 100%);
-  background-size: 200px 100%;
-  animation: laserStream 3s linear infinite;
+  top: 34px;
+  left: 4%;
+  width: 92%;
+  height: 6px;
+  background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.9) 45%, #ffffff 50%, rgba(245, 158, 11, 0.9) 55%, transparent 100%);
+  background-size: 280px 100%;
+  animation: laserStream 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   z-index: 2;
-  opacity: 0.75;
+  filter: drop-shadow(0 0 6px #f59e0b);
 }
 
 @keyframes laserStream {
-  0% { background-position: -200px 0; }
-  100% { background-position: calc(100% + 200px) 0; }
+  0% { background-position: -280px 0; }
+  100% { background-position: calc(100% + 280px) 0; }
 }
 
 .step-card {
@@ -811,8 +820,9 @@ pre.code-view.leak {
 
 .step-card.active-step {
   border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 16px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
 }
 
 .step-top {
@@ -822,10 +832,10 @@ pre.code-view.leak {
 }
 
 .step-circle {
-  width: 28px;
-  height: 28px;
-  background: #1e1e24;
-  border: 1px solid #33333d;
+  width: 30px;
+  height: 30px;
+  background: #19191e;
+  border: 1px solid #32323a;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -834,30 +844,33 @@ pre.code-view.leak {
   font-weight: 700;
   font-family: var(--font-mono);
   color: #e4e4e7;
-  transition: all 0.2s;
+  transition: all 0.25s;
 }
 
 .step-card.active-step .step-circle {
   background: #ffffff;
   color: #09090b;
   border-color: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.8);
+  transform: scale(1.1);
 }
 
 .step-state-tag {
-  font-size: 0.65rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 700;
   font-family: var(--font-mono);
   color: var(--text-dim);
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .step-card.active-step .step-state-tag {
   color: var(--amber);
+  animation: pulse-dot 1s infinite;
 }
 
 .step-name {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #fff;
 }
@@ -865,7 +878,7 @@ pre.code-view.leak {
 .step-detail {
   font-size: 0.72rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .step-spec {
@@ -878,7 +891,7 @@ pre.code-view.leak {
   background: rgba(255, 255, 255, 0.04);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   width: fit-content;
   margin-top: auto;
 }
@@ -896,7 +909,7 @@ pre.code-view.leak {
   justify-content: space-between;
   align-items: center;
   padding: 0.55rem 1rem;
-  background: #101014;
+  background: #111114;
   border-bottom: 1px solid var(--border-default);
   font-size: 0.75rem;
   font-family: var(--font-mono);
@@ -921,7 +934,8 @@ pre.code-view.leak {
 
 .telemetry-logs {
   padding: 0.85rem 1.15rem;
-  max-height: 150px;
+  max-height: 155px;
+  min-height: 120px;
   overflow-y: auto;
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -952,6 +966,10 @@ pre.code-view.leak {
 
 .log-tag.crit {
   color: var(--rose);
+}
+
+.log-tag.info {
+  color: #e4e4e7;
 }
 
 .log-msg {

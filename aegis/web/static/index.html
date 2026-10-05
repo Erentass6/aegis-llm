@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>AegisLLM | Enterprise Red-Teaming & Security Operations Console</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/style.css?v=20261005_2">
 </head>
 <body>
   <!-- Header -->
@@ -182,11 +185,15 @@
     <section class="pipeline-section">
       <div class="pipeline-header">
         <div class="pipeline-title-wrap">
-          <div class="pipeline-title" data-i18n="pipeline_title">⚡ Canlı Kırmızı Takım Saldırı Döngüsü & Denetim Hattı</div>
-          <div class="pipeline-subtitle" data-i18n="pipeline_subtitle">Her güvenlik taramasında arka planda milisaniyeler içinde yürütülen 5 aşamalı otonom siber güvenlik motoru</div>
+          <!-- Animated Radar Canvas -->
+          <canvas id="radar-canvas" width="60" height="60"></canvas>
+          <div>
+            <div class="pipeline-title" data-i18n="pipeline_title">⚡ Canlı Kırmızı Takım Saldırı Döngüsü & Denetim Hattı</div>
+            <div class="pipeline-subtitle" data-i18n="pipeline_subtitle">Her güvenlik taramasında arka planda milisaniyeler içinde yürütülen 5 aşamalı otonom siber güvenlik motoru</div>
+          </div>
         </div>
         <div class="status-pill" style="background: rgba(255,255,255,0.04); border-color: #27272a; color: #a1a1aa;">
-          <span class="status-dot" id="pipeline-dot" style="background: #a1a1aa;"></span>
+          <span class="status-dot" id="pipeline-dot" style="background: var(--emerald);"></span>
           <span id="pipeline-status-text" data-i18n="pipeline_status_idle">OTONOM MOTOR AKTİF</span>
         </div>
       </div>
@@ -272,6 +279,6 @@
     <span id="toast-msg">Panoya kopyalandı</span>
   </div>
 
-  <script src="/static/app.js"></script>
+  <script src="/static/app.js?v=20261005_2"></script>
 </body>
 </html>
