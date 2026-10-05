@@ -8,6 +8,11 @@ __pycache__/
 env/
 venv/
 
+# Local secrets and environment configuration
+.env
+.env.*
+!.env.example
+
 # Testing & Coverage
 .pytest_cache/
 .coverage

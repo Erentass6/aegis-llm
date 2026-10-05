@@ -1,14 +1,15 @@
 # 🛡️ AegisLLM
 
-[![CI Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://github.com)
+[![CI](https://github.com/Erentass6/aegis-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/Erentass6/aegis-llm/actions/workflows/ci.yml)
 [![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg?style=flat-square)](https://python.org)
-[![Tests](https://img.shields.io/badge/tests-17%2F17%20passed-success.svg?style=flat-square)](https://pytest.org)
 [![Compliance](https://img.shields.io/badge/standard-OWASP%20LLM%20Top%2010-red.svg?style=flat-square)](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 
-**AegisLLM** is an open-source **Automated LLM Red-Teaming, Jailbreak Fuzzing & Vulnerability Assessment Platform**. 
+**AegisLLM** is an experimental Python toolkit for assessing common prompt-injection, jailbreak, denial-of-service, and information-leakage behaviors in language-model applications. It combines configurable probes, mock targets, authorized OpenAI-compatible HTTP targets, heuristic evaluators, and Markdown/HTML reports.
 
-Designed for AI engineers, security researchers, and enterprise compliance teams, AegisLLM systematically stress-tests Large Language Models against the **OWASP Top 10 for LLMs**, detects alignment guardrail bypasses using **genetic adversarial mutation fuzzing**, and compiles executive-level security audit scorecards (Grades A+ through F).
+The project is intended for learning and controlled testing. Its findings and scores are heuristic signals, not a security certification, compliance audit, or guarantee that a model is safe.
+
+> **Authorized use only:** Run scans against local mocks or systems you own or have explicit permission to assess. The included sample reports use a mock target.
 
 ---
 
