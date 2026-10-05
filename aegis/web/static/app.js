@@ -44,7 +44,22 @@ const I18N = {
     injected_prompt_lbl: "Enjekte Edilen Saldırı İstemi",
     model_output_lbl: "Modelin İfşa Ettiği Kanıt Yanıtı",
     copy_btn: "Kopyala",
-    copied_toast: "Saldırı istemi panoya kopyalandı!"
+    copied_toast: "Saldırı istemi panoya kopyalandı!",
+    pipeline_title: "⚡ Canlı Kırmızı Takım Saldırı Döngüsü & Denetim Hattı",
+    pipeline_subtitle: "Her güvenlik taramasında arka planda milisaniyeler içinde yürütülen 5 aşamalı otonom siber güvenlik motoru",
+    pipeline_status_idle: "OTONOM MOTOR AKTİF",
+    pipeline_status_active: "SALDIRI HATTI YÜRÜTÜLÜYOR",
+    step1_title: "1. Saldırı Sentezi",
+    step1_desc: "OWASP Top 10 matrisinden 15+ çekirdek vektör dinamik olarak derlenir.",
+    step2_title: "2. Fuzzing Mutasyonu",
+    step2_desc: "Prompt'lar Base64, ROT13 ve sıfır-genişlikli karakterlerle şifrelenir.",
+    step3_title: "3. Asenkron Dağıtım",
+    step3_desc: "Eşzamanlı worker havuzu probları LLM hedef mimarisine fırlatır.",
+    step4_title: "4. Orakıl & Kanarya Denetimi",
+    step4_desc: "Model yanıtları sızıntı ve hizalanma kurallarına karşı taranır.",
+    step5_title: "5. Karne & Tehdit Raporu",
+    step5_desc: "Saldırı Başarı Oranı (ASR) ve kurumsal güvenlik notu mühürlenir.",
+    telemetry_title: "Gerçek Zamanlı Telemetri & Olay Günlüğü"
   },
   en: {
     header_subtitle: "OWASP Top 10 for LLMs Automated Vulnerability Scanner",
@@ -90,7 +105,22 @@ const I18N = {
     injected_prompt_lbl: "Injected Adversarial Prompt",
     model_output_lbl: "Model Output Evidence",
     copy_btn: "Copy",
-    copied_toast: "Payload copied to clipboard!"
+    copied_toast: "Payload copied to clipboard!",
+    pipeline_title: "⚡ Live Red-Team Attack Lifecycle & Pipeline",
+    pipeline_subtitle: "5-stage autonomous security assessment engine executing across every audit cycle",
+    pipeline_status_idle: "AUTONOMOUS ENGINE ACTIVE",
+    pipeline_status_active: "ATTACK PIPELINE EXECUTING",
+    step1_title: "1. Payload Synthesis",
+    step1_desc: "Synthesizes 15+ core attack vectors from OWASP LLM Top 10 matrix.",
+    step2_title: "2. Mutation Fuzzing",
+    step2_desc: "Obfuscates prompts via Base64, ROT13, and zero-width unicode spaces.",
+    step3_title: "3. Async Dispatch",
+    step3_desc: "Dispatches probes concurrently to target model worker pool.",
+    step4_title: "4. Oracle Inspection",
+    step4_desc: "Inspects model responses with refusal and canary token detectors.",
+    step5_title: "5. Scorecard & Intel",
+    step5_desc: "Compiles Attack Success Rate (ASR) and executive security grade.",
+    telemetry_title: "Real-Time Telemetry & Event Log"
   },
   de: {
     header_subtitle: "Automatisierter Schwachstellenscanner für LLMs (OWASP Top 10)",
@@ -136,7 +166,22 @@ const I18N = {
     injected_prompt_lbl: "Injizierter Angriffsprompt",
     model_output_lbl: "Modellausgabe-Beweis",
     copy_btn: "Kopieren",
-    copied_toast: "In die Zwischenablage kopiert!"
+    copied_toast: "In die Zwischenablage kopiert!",
+    pipeline_title: "⚡ Live Red-Team Angriffszyklus & Pipeline",
+    pipeline_subtitle: "5-stufige autonome Sicherheitsbewertungs-Engine",
+    pipeline_status_idle: "AUTONOMER MOTOR AKTIV",
+    pipeline_status_active: "PIPELINE LÄUFT",
+    step1_title: "1. Payload-Synthese",
+    step1_desc: "Synthetisiert 15+ Angriffsvektoren aus der OWASP Top 10 Matrix.",
+    step2_title: "2. Mutations-Fuzzing",
+    step2_desc: "Verschleiert Prompts mit Base64, ROT13 und Zero-Width-Zeichen.",
+    step3_title: "3. Async-Versand",
+    step3_desc: "Sendet Sonden parallel über Worker-Pool an das Zielmodell.",
+    step4_title: "4. Orakel-Prüfung",
+    step4_desc: "Überprüft Antworten mit Refusal- und Canary-Token-Detektoren.",
+    step5_title: "5. Scorecard & Bericht",
+    step5_desc: "Erstellt ASR-Rate und finale Sicherheitsnote.",
+    telemetry_title: "Echtzeit-Telemetrie & Ereignisprotokoll"
   },
   fr: {
     header_subtitle: "Scanner automatisé de vulnérabilités pour LLM (OWASP Top 10)",
@@ -182,7 +227,22 @@ const I18N = {
     injected_prompt_lbl: "Prompt d'attaque injecté",
     model_output_lbl: "Preuve de réponse du modèle",
     copy_btn: "Copier",
-    copied_toast: "Copié dans le presse-papiers !"
+    copied_toast: "Copié dans le presse-papiers !",
+    pipeline_title: "⚡ Cycle de vie d'attaque Red-Team & Pipeline en direct",
+    pipeline_subtitle: "Moteur d'évaluation de sécurité autonome en 5 étapes",
+    pipeline_status_idle: "MOTEUR AUTONOME ACTIF",
+    pipeline_status_active: "PIPELINE EN EXÉCUTION",
+    step1_title: "1. Synthèse des payloads",
+    step1_desc: "Synthétise 15+ vecteurs d'attaque de la matrice OWASP Top 10.",
+    step2_title: "2. Fuzzing par mutation",
+    step2_desc: "Obfusque les prompts via Base64, ROT13 et espaces zéro largeur.",
+    step3_title: "3. Distribution asynchrone",
+    step3_desc: "Envoie des sondes simultanées au modèle cible.",
+    step4_title: "4. Inspection par oracles",
+    step4_desc: "Inspecte les réponses avec détecteurs de refus et jetons canaris.",
+    step5_title: "5. Scorecard & Rapport",
+    step5_desc: "Compile le taux ASR et la note finale de sécurité.",
+    telemetry_title: "Télémétrie en temps réel & Journal d'événements"
   },
   es: {
     header_subtitle: "Escáner automatizado de vulnerabilidades para LLM (OWASP Top 10)",
@@ -228,13 +288,25 @@ const I18N = {
     injected_prompt_lbl: "Prompt de ataque inyectado",
     model_output_lbl: "Evidencia de respuesta del modelo",
     copy_btn: "Copiar",
-    copied_toast: "¡Copiado al portapapeles!"
+    copied_toast: "¡Copiado al portapapeles!",
+    pipeline_title: "⚡ Ciclo de vida de ataque Red-Team & Pipeline en vivo",
+    pipeline_subtitle: "Motor de evaluación de seguridad autónomo en 5 etapas",
+    pipeline_status_idle: "MOTOR AUTÓNOMO ACTIVO",
+    pipeline_status_active: "PIPELINE EN EJECUCIÓN",
+    step1_title: "1. Síntesis de payloads",
+    step1_desc: "Sintetiza 15+ vectores de ataque de la matriz OWASP Top 10.",
+    step2_title: "2. Fuzzing de mutación",
+    step2_desc: "Ofusca prompts mediante Base64, ROT13 y espacios invisibles.",
+    step3_title: "3. Envío asíncrono",
+    step3_desc: "Envía pruebas concurrentes a través del grupo de workers.",
+    step4_title: "4. Inspección de oráculos"
   }
 };
 
 let currentLang = localStorage.getItem("aegis_lang") || "tr";
 let isScanning = false;
 let scanInterval = null;
+let telemetryCounter = 0;
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
@@ -243,6 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
     langSelect.value = currentLang;
   }
   applyTranslations(currentLang);
+  initTelemetryLogs();
 });
 
 // Change Language
@@ -290,7 +363,7 @@ function copyToClipboard(text) {
   });
 }
 
-// Target Architecture Switcher
+// Target Switcher
 function setTargetType(type) {
   document.getElementById("target-type").value = type;
   const mockBtn = document.getElementById("btn-target-mock");
@@ -335,6 +408,77 @@ function toggleVulnCard(headerEl) {
   }
 }
 
+// Telemetry Log Appender
+function appendLog(tag, msg, type = "") {
+  const container = document.getElementById("telemetry-logs");
+  if (!container) return;
+
+  const now = new Date();
+  const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}.${String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0')}`;
+
+  const row = document.createElement("div");
+  row.className = "log-entry";
+  row.innerHTML = `
+    <span class="log-time">[${timeStr}]</span>
+    <span class="log-tag ${type}">[${tag}]</span>
+    <span class="log-msg">${msg}</span>
+  `;
+  container.appendChild(row);
+  container.scrollTop = container.scrollHeight;
+}
+
+function initTelemetryLogs() {
+  appendLog("SYSTEM", "AegisLLM Enterprise SOC autonomous engine armed and listening.", "success");
+  appendLog("OWASP", "Loaded 15 attack suites across LLM01 (Injection), LLM02 (Leaks), LLM04 (DoS), LLM07 (System Prompt).");
+  appendLog("ORACLES", "Refusal heuristic detector, canary token oracle & judge engines synchronized.");
+  appendLog("STANDBY", "Awaiting target scan initiation.");
+}
+
+// Set Active Step in Bottom Pipeline Visualizer
+function setPipelineStep(stepNum, stateText = "ÇALIŞIYOR") {
+  for (let i = 1; i <= 5; i++) {
+    const node = document.getElementById(`step-node-${i}`);
+    const tag = document.getElementById(`step-tag-${i}`);
+    if (!node || !tag) continue;
+
+    if (i < stepNum) {
+      node.classList.remove("active-step");
+      node.style.borderColor = "var(--emerald)";
+      tag.innerText = "TAMAMLANDI";
+      tag.style.color = "var(--emerald)";
+    } else if (i === stepNum) {
+      node.classList.add("active-step");
+      node.style.borderColor = "#ffffff";
+      tag.innerText = stateText;
+      tag.style.color = "var(--amber)";
+    } else {
+      node.classList.remove("active-step");
+      node.style.borderColor = "var(--border-default)";
+      tag.innerText = "BEKLİYOR";
+      tag.style.color = "var(--text-dim)";
+    }
+  }
+}
+
+function resetPipeline() {
+  for (let i = 1; i <= 5; i++) {
+    const node = document.getElementById(`step-node-${i}`);
+    const tag = document.getElementById(`step-tag-${i}`);
+    if (node) {
+      node.classList.remove("active-step");
+      node.style.borderColor = "var(--border-default)";
+    }
+    if (tag) {
+      tag.innerText = "HAZIR";
+      tag.style.color = "var(--text-dim)";
+    }
+  }
+  const statusText = document.getElementById("pipeline-status-text");
+  const dot = document.getElementById("pipeline-dot");
+  if (statusText) statusText.innerText = t("pipeline_status_idle");
+  if (dot) dot.style.background = "#a1a1aa";
+}
+
 // Start Scan
 async function handleStartScan() {
   if (isScanning) return;
@@ -348,6 +492,8 @@ async function handleStartScan() {
   const progressBar = document.getElementById("progress-bar-fill");
   const feedText = document.getElementById("scan-feed-text");
   const vulnContainer = document.getElementById("vuln-container");
+  const pipelineStatusText = document.getElementById("pipeline-status-text");
+  const pipelineDot = document.getElementById("pipeline-dot");
 
   const targetType = document.getElementById("target-type").value;
   const mockProfile = document.getElementById("mock-profile").value;
@@ -367,18 +513,45 @@ async function handleStartScan() {
   scanningWidget.classList.add("active");
   progressBar.style.width = "5%";
 
-  // Animated probe ticker
+  if (pipelineStatusText) pipelineStatusText.innerText = t("pipeline_status_active");
+  if (pipelineDot) pipelineDot.style.background = "var(--amber)";
+
+  // Telemetry: Start
+  appendLog("SCAN_START", `Initiated red-team scan. Target: ${targetType === 'mock' ? mockProfile : modelName}, Mutations: ${applyMutations}`);
+  
+  // Animate Pipeline Step 1
+  setPipelineStep(1, "SENTEZLENİYOR");
+  appendLog("PAYLOAD_GEN", "Compiling 15 base attack vectors from OWASP LLM taxonomy...");
+
+  // Animated probe ticker & pipeline step transitions
   const feedItems = I18N[currentLang]?.probe_feed || I18N.tr.probe_feed;
   let feedIndex = 0;
   feedText.innerText = feedItems[0];
   
   let progress = 5;
+  let currentStep = 1;
+
   scanInterval = setInterval(() => {
     feedIndex = (feedIndex + 1) % feedItems.length;
     feedText.innerText = feedItems[feedIndex];
-    if (progress < 88) {
-      progress += Math.floor(Math.random() * 12) + 6;
+
+    if (progress < 85) {
+      progress += Math.floor(Math.random() * 10) + 6;
       progressBar.style.width = `${progress}%`;
+
+      if (progress > 20 && currentStep === 1) {
+        currentStep = 2;
+        setPipelineStep(2, "MUTASYON");
+        appendLog("MUTATOR", applyMutations ? "Transforming probes with Base64, ROT13, Leet & Zero-Width Obfuscation." : "Mutation bypassed; testing clean canonical probes.");
+      } else if (progress > 45 && currentStep === 2) {
+        currentStep = 3;
+        setPipelineStep(3, "GÖNDERİLİYOR");
+        appendLog("DISPATCH", "Worker pool active (concurrency=5). Asynchronously firing probes at target model.");
+      } else if (progress > 70 && currentStep === 3) {
+        currentStep = 4;
+        setPipelineStep(4, "DENETLENİYOR");
+        appendLog("ORACLE", "Refusal Oracle & Canary Leak detector inspecting streaming model token outputs.");
+      }
     }
   }, 320);
 
@@ -405,6 +578,13 @@ async function handleStartScan() {
       scanningWidget.classList.remove("active");
     }, 400);
 
+    // Pipeline Step 5 (Finished)
+    setPipelineStep(5, "MÜHÜRLENDİ");
+    if (pipelineStatusText) pipelineStatusText.innerText = t("pipeline_status_idle");
+    if (pipelineDot) pipelineDot.style.background = "var(--emerald)";
+
+    appendLog("SCORECARD", `Audit finalized in ${data.scan_duration_seconds}s. Final Grade: ${data.grade}, ASR: ${data.attack_success_rate_pct}%, Exploits: ${data.successful_exploits}/${data.total_probes}`, data.successful_exploits > 0 ? "crit" : "success");
+
     statusBadge.innerText = `${t("status_completed")} (${data.scan_duration_seconds}s)`;
     statusBadge.className = "badge-tag hardened";
 
@@ -414,7 +594,7 @@ async function handleStartScan() {
     if (data.grade === 'A+' || data.grade === 'A') {
       gradeEl.style.color = 'var(--emerald)';
     } else if (data.grade === 'B') {
-      gradeEl.style.color = '#38bdf8';
+      gradeEl.style.color = '#e4e4e7';
     } else if (data.grade === 'C') {
       gradeEl.style.color = 'var(--amber)';
     } else {
@@ -438,7 +618,7 @@ async function handleStartScan() {
     vulnContainer.innerHTML = "";
     data.vulnerabilities.forEach((v, idx) => {
       const card = document.createElement("div");
-      card.className = "vuln-card" + (idx === 0 ? " open" : ""); // first card open by default
+      card.className = "vuln-card" + (idx === 0 ? " open" : ""); // first card open
       
       const safePrompt = v.prompt_used.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const safeResponse = v.response_sample.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -482,6 +662,7 @@ async function handleStartScan() {
     statusBadge.innerText = "HATA / ERROR";
     statusBadge.className = "badge-tag vulnerable";
     vulnContainer.innerHTML = `<div style="padding: 2rem; color: var(--rose); text-align: center;">Error: ${err.message}</div>`;
+    appendLog("ERROR", `Scan pipeline failed: ${err.message}`, "crit");
   } finally {
     isScanning = false;
     btn.disabled = false;

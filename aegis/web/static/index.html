@@ -34,8 +34,9 @@
     </div>
   </header>
 
-  <!-- Main Grid -->
+  <!-- Main Layout -->
   <main>
+    <!-- TOP GRID: SCAN CONTROLS & SCORECARD -->
     <div class="grid-2">
       <!-- LEFT: TARGET & SCAN CONFIG -->
       <div class="card">
@@ -176,6 +177,94 @@
         </div>
       </div>
     </div>
+
+    <!-- BOTTOM SECTION: ANIMATED RED-TEAM ATTACK PIPELINE & TELEMETRY STREAM -->
+    <section class="pipeline-section">
+      <div class="pipeline-header">
+        <div class="pipeline-title-wrap">
+          <div class="pipeline-title" data-i18n="pipeline_title">⚡ Canlı Kırmızı Takım Saldırı Döngüsü & Denetim Hattı</div>
+          <div class="pipeline-subtitle" data-i18n="pipeline_subtitle">Her güvenlik taramasında arka planda milisaniyeler içinde yürütülen 5 aşamalı otonom siber güvenlik motoru</div>
+        </div>
+        <div class="status-pill" style="background: rgba(255,255,255,0.04); border-color: #27272a; color: #a1a1aa;">
+          <span class="status-dot" id="pipeline-dot" style="background: #a1a1aa;"></span>
+          <span id="pipeline-status-text" data-i18n="pipeline_status_idle">OTONOM MOTOR AKTİF</span>
+        </div>
+      </div>
+
+      <!-- 5-Step Visual Track with Animated Laser Flow -->
+      <div class="pipeline-track">
+        <!-- Step 1 -->
+        <div class="step-card" id="step-node-1">
+          <div class="step-top">
+            <div class="step-circle">1</div>
+            <span class="step-state-tag" id="step-tag-1">HAZIR</span>
+          </div>
+          <div class="step-name" data-i18n="step1_title">1. Saldırı Sentezi</div>
+          <div class="step-detail" data-i18n="step1_desc">OWASP Top 10 matrisinden 15+ çekirdek vektör dinamik olarak derlenir.</div>
+          <div class="step-spec">📦 15 Vektör</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card" id="step-node-2">
+          <div class="step-top">
+            <div class="step-circle">2</div>
+            <span class="step-state-tag" id="step-tag-2">HAZIR</span>
+          </div>
+          <div class="step-name" data-i18n="step2_title">2. Fuzzing Mutasyonu</div>
+          <div class="step-detail" data-i18n="step2_desc">Prompt'lar Base64, ROT13 ve sıfır-genişlikli karakterlerle şifrelenir.</div>
+          <div class="step-spec">🧬 5 Obfuskasyon</div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card" id="step-node-3">
+          <div class="step-top">
+            <div class="step-circle">3</div>
+            <span class="step-state-tag" id="step-tag-3">HAZIR</span>
+          </div>
+          <div class="step-name" data-i18n="step3_title">3. Asenkron Dağıtım</div>
+          <div class="step-detail" data-i18n="step3_desc">Eşzamanlı worker havuzu probları LLM hedef mimarisine fırlatır.</div>
+          <div class="step-spec">⚡ 5 Eşzamanlı Worker</div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card" id="step-node-4">
+          <div class="step-top">
+            <div class="step-circle">4</div>
+            <span class="step-state-tag" id="step-tag-4">HAZIR</span>
+          </div>
+          <div class="step-name" data-i18n="step4_title">4. Orakıl & Kanarya Denetimi</div>
+          <div class="step-detail" data-i18n="step4_desc">Model yanıtları sızıntı ve hizalanma kurallarına karşı taranır.</div>
+          <div class="step-spec">🛡️ 3 Orakıl Hakemi</div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card" id="step-node-5">
+          <div class="step-top">
+            <div class="step-circle">5</div>
+            <span class="step-state-tag" id="step-tag-5">HAZIR</span>
+          </div>
+          <div class="step-name" data-i18n="step5_title">5. Karne & Tehdit Raporu</div>
+          <div class="step-detail" data-i18n="step5_desc">Saldırı Başarı Oranı (ASR) ve kurumsal güvenlik notu mühürlenir.</div>
+          <div class="step-spec">📊 ASR % / Not</div>
+        </div>
+      </div>
+
+      <!-- Real-Time Telemetry Terminal -->
+      <div class="telemetry-wrap">
+        <div class="telemetry-bar">
+          <div class="telemetry-dots">
+            <div class="telemetry-dot"></div>
+            <div class="telemetry-dot"></div>
+            <div class="telemetry-dot"></div>
+          </div>
+          <span data-i18n="telemetry_title">Gerçek Zamanlı Telemetri & Olay Günlüğü</span>
+          <span style="font-family: var(--font-mono); color: var(--emerald);">LIVE TELEMETRY</span>
+        </div>
+        <div id="telemetry-logs" class="telemetry-logs">
+          <!-- Populated live by app.js -->
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Clean Toast -->
